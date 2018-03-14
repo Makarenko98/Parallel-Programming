@@ -1,10 +1,9 @@
-./out
-./other
-*/obj
-*/bin
-*/Debug
-*/*/Debug
-*/.vs
+out/
+other/
+obj/
+bin/
+Debug/
+.vs/
 *.exe
 *.pdb
 *.lik
