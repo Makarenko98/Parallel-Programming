@@ -1,0 +1,9 @@
+./out
+./other
+*/obj
+*/bin
+*/Debug
+*/*/Debug
+*.exe
+*.pdb
+*.lik
