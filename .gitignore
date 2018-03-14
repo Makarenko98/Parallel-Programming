@@ -4,6 +4,7 @@
 */bin
 */Debug
 */*/Debug
+*/.vs
 *.exe
 *.pdb
 *.lik
