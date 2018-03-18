@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -13,13 +14,18 @@ namespace Lab3
     {
         static void Main (string[] args)
         {
+            // int workerThreads, completionPortThreads;
+            // ThreadPool.GetMinThreads(out workerThreads, out completionPortThreads);
+            // System.Console.WriteLine(workerThreads + " " +completionPortThreads);
+            var timer = Stopwatch.StartNew ();
             System.Console.WriteLine ("Enter N:");
             int N = int.Parse (Console.ReadLine ());
             System.Console.WriteLine ("Result:");
             var task = Calculate (N);
 
             task.Wait ();
-
+            timer.Stop ();
+            System.Console.WriteLine ("Elapsed time: " + timer.Elapsed);
             Console.ReadKey ();
         }
 
@@ -33,16 +39,16 @@ namespace Lab3
             var oPlusTtask = SumVectors (O, T);
             var sortVecotrsTask = SortVecotrs (oPlusTtask);
             var multiplyMatrixTask = MultiplyMatrix (MR, MS);
-            var transMatrixTask = TransMatrix(multiplyMatrixTask);
-            
+            var transMatrixTask = TransMatrix (multiplyMatrixTask);
+
             O = await sortVecotrsTask;
             MR = await transMatrixTask;
 
-            var Om = Matrix.GetMatrixOfZero(N);
-            
+            var Om = Matrix.GetMatrixOfZero (N);
+
             Om[0] = O;
 
-            System.Console.WriteLine((Om*MR)[0]);
+            System.Console.WriteLine ((Om * MR) [0]);
         }
 
         public static Task<Vector> SumVectors (Vector O, Vector T)
@@ -57,12 +63,13 @@ namespace Lab3
 
         public static Task<Matrix> MultiplyMatrix (Matrix MR, Matrix MS)
         {
-            return Task.Factory.StartNew (() => MR * MS);
+            // return Task.Factory.StartNew (() => MR * MS);
+            return Matrix.MultiplyAsync (MR, MS);
         }
 
         public static Task<Matrix> TransMatrix (Task<Matrix> multMatrixTask)
         {
-            return Task.Factory.StartNew (() => multMatrixTask.Result.TransMatrix());
+            return Task.Factory.StartNew (() => multMatrixTask.Result.TransMatrix ());
         }
     }
 }
