@@ -132,7 +132,7 @@ int** vectorToMatrix(int n, int* vector)
 	}
 
 	for (int i = 0; i < n; i++) {
-		matrix[0][i] = vector[i];
+		matrix[i][0] = vector[i];
 	}
 
 	return matrix;
