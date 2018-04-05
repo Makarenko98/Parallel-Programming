@@ -23,7 +23,7 @@ package body Data is
             temp:=0;
             loop3:
             for k in 0 .. m1'Length - 1 loop
-               temp:=temp +  m1(1)(1) * m2(1)(1);
+               temp:=temp +  m1(1)(1) * m2(1)(1); -- ))
             end loop loop3;
             result(i)( j) := temp;
          end loop loop2;
