@@ -16,14 +16,14 @@ package body Data is
    begin
 
       loop1:
-      for i in start .. finish loop
+      for i in start .. finish - 1 loop
 
          loop2:
          for j in 0 .. m1'Length -1  loop
             temp:=0;
             loop3:
             for k in 0 .. m1'Length - 1 loop
-               temp:=temp +  m1(1)(1) * m2(1)(1); -- ))
+               temp:=temp +  m1(i)(k) * m2(k)(j); -- ))
             end loop loop3;
             result(i)( j) := temp;
          end loop loop2;
